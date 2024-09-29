@@ -18,18 +18,17 @@ steps:
     packageType: 'sdk'
     version: '8.0.108'
 
-# Step 2: Restore dependencies
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
+# Step 2: Restore dependencies using dotnet restore
+- script: |
+    dotnet restore HelloWorldApp.sln
+  displayName: 'Restore Dependencies'
 
-# Step 3: Build the project
+# Step 3: Build the project using dotnet build
 - script: |
     dotnet build --configuration Release
   displayName: 'Build Project'
 
-# Step 4: Pack the project (create NuGet package)
+# Step 4: Pack the project (create NuGet package) using dotnet pack
 - script: |
     dotnet pack --configuration Release --output $(Build.ArtifactStagingDirectory) /p:PackageVersion=$(packageVersion)
   displayName: 'Pack Project as NuGet Package'
