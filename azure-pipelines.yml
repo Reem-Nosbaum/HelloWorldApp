@@ -2,7 +2,9 @@ trigger:
 - master
 
 pool:
-  name: HostedServerPool
+  name: Default
+  demands:
+    - agent.name -equals reem-ubuntu
 
 steps:
 - task: UseDotNet@2
