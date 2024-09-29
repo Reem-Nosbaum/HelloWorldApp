@@ -32,6 +32,6 @@ steps:
     command: 'publish'
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
     feedsToUse: 'internal'
-    vstsFeed: 'HelloWorldAppArtifacts'  # Your feed ID from the URL
+    vstsFeed: 'HelloWorldAppArtifacts'
     packageName: 'HelloWorldApp'
     packageVersion: '1.0.$(Build.BuildId)'
