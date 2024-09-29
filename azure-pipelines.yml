@@ -2,7 +2,9 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: HostedServerPool
+  demands:
+    - agent.name -equals HostedServerPool
 
 steps:
 - task: UseDotNet@2
