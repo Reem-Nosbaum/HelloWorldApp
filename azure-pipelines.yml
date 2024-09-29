@@ -26,12 +26,12 @@ steps:
     artifact: 'drop'
     publishLocation: 'pipeline'
 
-# Publish the build to Azure Artifacts feed
+# Publish the build to Azure Artifacts feed using feed URL
 - task: UniversalPackages@0
   inputs:
     command: 'publish'
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
     feedsToUse: 'internal'
-    vstsFeed: 'HelloWorldAppArtifacts'
+    vstsFeed: 'https://dev.azure.com/reemnu/HelloWorldAppPipeline/_artifacts/feed/HelloWorldAppArtifacts'
     packageName: 'HelloWorldApp'
     packageVersion: '1.0.$(Build.BuildId)'
