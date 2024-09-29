@@ -7,9 +7,9 @@ pool:
     - agent.name -equals reem-ubuntu
 
 variables:
-  projectName: 'HelloWorldApp'  # Define project name
-  packageVersion: '1.0.$(Build.BuildId)'  # Automatically increment version
-  feedName: 'HelloWorldAppArtifacts'  # Azure Artifacts feed name
+  projectName: 'HelloWorldApp'
+  packageVersion: '1.0.$(Build.BuildId)'
+  feedName: 'HelloWorldAppArtifacts'
 
 steps:
 # Step 1: Use the .NET SDK
@@ -19,9 +19,10 @@ steps:
     version: '8.0.108'
 
 # Step 2: Restore dependencies
-- script: |
-    dotnet restore
-  displayName: 'Restore Dependencies'
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
 
 # Step 3: Build the project
 - script: |
