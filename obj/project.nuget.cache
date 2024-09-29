@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Sh8Mm12t8rIjvcL+kMM//ZtSYgaWDOTibDJGCBpySC6Yn875+fr7omXRQWBmJDZm2TO5/VyLT0I45PwJiZDuEg==",
+  "dgSpecHash": "3ZT0coFWEyEu4FKdkWkeGTfJec3funMnlA5qGEh4ANfB1kGsvJElEDqxFxnY79W6kHMtn9gQUf/E2O/SKtsjjQ==",
   "success": true,
   "projectFilePath": "/home/reemnu/HelloWorldApp/HelloWorldApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/reemnu/.nuget/packages/microsoft.netcore.app.ref/6.0.33/microsoft.netcore.app.ref.6.0.33.nupkg.sha512",
+    "/home/reemnu/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.33/microsoft.aspnetcore.app.ref.6.0.33.nupkg.sha512",
+    "/home/reemnu/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.33/microsoft.netcore.app.host.linux-x64.6.0.33.nupkg.sha512"
+  ],
   "logs": []
 }

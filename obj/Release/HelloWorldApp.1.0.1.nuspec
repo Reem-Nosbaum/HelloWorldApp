@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>HelloWorldApp</id>
+    <version>1.0.1</version>
+    <authors>YourName</authors>
+    <description>A Hello World app</description>
+    <repository type="git" commit="981cdd9ff941809cd3685a5048a466be74283b85" />
+    <dependencies>
+      <group targetFramework="net6.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="/home/reemnu/HelloWorldApp/bin/Release/net6.0/HelloWorldApp.runtimeconfig.json" target="lib/net6.0/HelloWorldApp.runtimeconfig.json" />
+    <file src="/home/reemnu/HelloWorldApp/bin/Release/net6.0/HelloWorldApp.dll" target="lib/net6.0/HelloWorldApp.dll" />
+  </files>
+</package>

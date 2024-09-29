@@ -7,31 +7,32 @@ pool:
     - agent.name -equals reem-ubuntu
 
 steps:
-# Use the .NET SDK
+# Step 1: Use the .NET SDK
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
     version: '8.0.108'
 
-# Build and publish the project
+# Step 2: Restore dependencies
 - script: |
-    dotnet build
-    dotnet publish -c Release -o $(Build.ArtifactStagingDirectory)
+    dotnet restore
+  displayName: 'Restore Dependencies'
+
+# Step 3: Build the project
+- script: |
+    dotnet build --configuration Release
   displayName: 'Build Project'
 
-# Publish the build as a pipeline artifact
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)'
-    artifact: 'drop'
-    publishLocation: 'pipeline'
+# Step 4: Pack the project (create NuGet package)
+- script: |
+    dotnet pack --configuration Release --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Pack Project as NuGet Package'
 
-# Publish the build to Azure Artifacts feed using feed URL
-- task: UniversalPackages@0
+# Step 5: Push the package to Azure Artifacts feed
+- task: NuGetCommand@2
   inputs:
-    command: 'publish'
-    publishDirectory: '$(Build.ArtifactStagingDirectory)'
-    feedsToUse: 'internal'
-    vstsFeed: 'https://dev.azure.com/reemnu/HelloWorldAppPipeline/_artifacts/feed/HelloWorldAppArtifacts'
-    packageName: 'HelloWorldApp'
-    packageVersion: '1.0.$(Build.BuildId)'
+    command: 'push'
+    publishFeed: 'HelloWorldAppArtifacts'  # Name of your Azure Artifacts feed
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    allowPackageConflicts: true  # This allows overwriting existing versions if necessary

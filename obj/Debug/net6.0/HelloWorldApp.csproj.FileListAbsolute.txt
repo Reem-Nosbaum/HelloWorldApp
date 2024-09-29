@@ -1,0 +1,15 @@
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.AssemblyInfoInputs.cache
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.AssemblyInfo.cs
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.csproj.CoreCompileInputs.cache
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.sourcelink.json
+/home/reemnu/HelloWorldApp/bin/Debug/net6.0/HelloWorldApp
+/home/reemnu/HelloWorldApp/bin/Debug/net6.0/HelloWorldApp.deps.json
+/home/reemnu/HelloWorldApp/bin/Debug/net6.0/HelloWorldApp.runtimeconfig.json
+/home/reemnu/HelloWorldApp/bin/Debug/net6.0/HelloWorldApp.dll
+/home/reemnu/HelloWorldApp/bin/Debug/net6.0/HelloWorldApp.pdb
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.dll
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/refint/HelloWorldApp.dll
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.pdb
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/HelloWorldApp.genruntimeconfig.cache
+/home/reemnu/HelloWorldApp/obj/Debug/net6.0/ref/HelloWorldApp.dll

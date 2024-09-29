@@ -1,5 +1,13 @@
-<PropertyGroup>
-  <PackageId>HelloWorldApp</PackageId>
-  <Authors>YourName</Authors>
-  <Company>YourCompany</Company>
-</PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>HelloWorldApp</PackageId>
+    <Version>1.0.1</Version> <!-- You can manually update or automate this -->
+    <Authors>YourName</Authors>
+    <Company>YourCompany</Company>
+    <Description>A Hello World app</Description>
+  </PropertyGroup>
+
+</Project>
