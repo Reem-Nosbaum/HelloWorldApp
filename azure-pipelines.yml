@@ -4,7 +4,7 @@ trigger:
 pool:
   name: HostedServerPool
   demands:
-    - agent.name -equals reem-ubuntu
+    - agent.name -equals HostedServerPool
 
 steps:
 - task: UseDotNet@2
