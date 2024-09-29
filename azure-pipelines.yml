@@ -3,8 +3,6 @@ trigger:
 
 pool:
   name: HostedServerPool
-  demands:
-    - agent.name -equals HostedServerPool
 
 steps:
 - task: UseDotNet@2
