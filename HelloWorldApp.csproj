@@ -1,6 +1,5 @@
 <PropertyGroup>
   <PackageId>HelloWorldApp</PackageId>
-  <Version>1.0.$(Build.BuildId)</Version> <!-- Automatically increment version using build ID -->
   <Authors>YourName</Authors>
   <Company>YourCompany</Company>
 </PropertyGroup>
