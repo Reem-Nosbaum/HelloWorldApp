@@ -41,4 +41,3 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
     allowPackageConflicts: true
-    externalEndpoints: '$(PAT)'  # Reference the secret variable
