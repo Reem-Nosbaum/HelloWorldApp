@@ -41,8 +41,7 @@ steps:
 - task: NuGetCommand@2
   inputs:
     command: 'push'
-    publishFeed: '$(feedName)'  # This references your Azure Artifacts feed
+    publishFeed: '$(feedName)'  # This should reference the feed in Azure Artifacts
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
     allowPackageConflicts: true
-    externalFeedUrl: 'https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json'  # Correct feed URL
