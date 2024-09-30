@@ -18,31 +18,26 @@ steps:
     packageType: 'sdk'
     version: '8.0.108'
 
-# Step 2: Restore dependencies using NuGetCommand (handles auth too)
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
-    feedsToUse: 'select'
-    selectOrConfig: 'config'
-    nugetConfigPath: 'NuGet.config'
-  displayName: 'Restore NuGet Packages'
+# Step 2: Restore dependencies using dotnet restore
+- script: |
+    dotnet restore HelloWorldApp.sln
+  displayName: 'Restore Dependencies'
+  env:
+    VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
 
 # Step 3: Build the project using dotnet build
 - script: |
     dotnet build --configuration Release
   displayName: 'Build Project'
 
-# Step 4: Pack the project (create NuGet package) using dotnet pack
+# Step 4: Pack the project (create NuGet package)
 - script: |
     dotnet pack --configuration Release --output $(Build.ArtifactStagingDirectory) /p:PackageVersion=$(packageVersion)
   displayName: 'Pack Project as NuGet Package'
 
-# Step 5: Push the package to Azure Artifacts feed
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    publishFeed: '$(feedName)'  # This should reference the feed in Azure Artifacts
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-    allowPackageConflicts: true
+# Step 5: Push the package to Azure Artifacts feed using dotnet
+- script: |
+    dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg --source "https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json" --api-key $(System.AccessToken) --skip-duplicate
+  displayName: 'Push NuGet Package to Azure Artifacts'
+  env:
+    VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
