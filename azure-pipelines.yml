@@ -80,7 +80,7 @@ steps:
       STATUS="Failure";
     fi
     echo "Sending email notification about pipeline status: $STATUS"
-    echo "Pipeline Status: $STATUS" | mail -s "Pipeline Status: $STATUS" youremail@domain.com
+    echo "Pipeline Status: $STATUS" | mail -s "Pipeline Status: $STATUS" reemnu@gmail.com
   displayName: 'Send Email Notification'
   condition: always() # This ensures the email is sent even if the pipeline fails
 
