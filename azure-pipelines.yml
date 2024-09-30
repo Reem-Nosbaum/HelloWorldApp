@@ -31,7 +31,10 @@ steps:
 # Step 3: Print the Version to the Console
 - script: |
     echo "Building version $(packageVersion)"
-  displayName: 'Print Version to Console'
+    echo "Branch name: $(Build.SourceBranchName)"
+    echo "Package will be named: $(Build.SourceBranchName)_$(packageVersion)"
+  displayName: 'Print Version and Branch Name to Console'
+
 
 # Step 4: Restore dependencies using dotnet restore
 - script: |
@@ -57,12 +60,19 @@ steps:
 
 # Step 8: Pack the project (create NuGet package)
 - script: |
+    branchName=$(Build.SourceBranchName)  # Get the current branch name
     dotnet pack --configuration Release --output $(Build.ArtifactStagingDirectory) /p:PackageVersion=$(packageVersion)
-  displayName: 'Pack Project as NuGet Package'
+    mv $(Build.ArtifactStagingDirectory)/HelloWorldApp.$(packageVersion).nupkg $(Build.ArtifactStagingDirectory)/${branchName}_${packageVersion}.nupkg  # Rename package with branch and version
+  displayName: 'Pack Project as NuGet Package with Branch and Version'
+
 
 # Step 9: Push the package to Azure Artifacts feed using dotnet
 - script: |
-    dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg --source "https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json" --api-key $(System.AccessToken) --skip-duplicate
-  displayName: 'Push NuGet Package to Azure Artifacts'
+    branchName=$(Build.SourceBranchName)
+    dotnet nuget push $(Build.ArtifactStagingDirectory)/${branchName}_${packageVersion}.nupkg --source "https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json" --api-key $(System.AccessToken) --skip-duplicate
+  displayName: 'Push NuGet Package with Branch and Version to Azure Artifacts'
   env:
     VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
+
+
+
