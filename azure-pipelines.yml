@@ -71,3 +71,16 @@ steps:
   displayName: 'Push NuGet Package with Branch and Version to Azure Artifacts'
   env:
     VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
+    
+# Add a final step to send email notification
+- script: |
+    if [ "$(Build.Status)" == "Succeeded" ]; then
+      STATUS="Success";
+    else
+      STATUS="Failure";
+    fi
+    echo "Sending email notification about pipeline status: $STATUS"
+    echo "Pipeline Status: $STATUS" | mail -s "Pipeline Status: $STATUS" youremail@domain.com
+  displayName: 'Send Email Notification'
+  condition: always() # This ensures the email is sent even if the pipeline fails
+
