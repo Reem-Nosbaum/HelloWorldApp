@@ -48,7 +48,7 @@ steps:
     dotnet restore HelloWorldApp.sln
   displayName: 'Restore Dependencies'
   env:
-    VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/shalom/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
+    VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
 
 # Step 5: Build the project using dotnet build
 - script: |
@@ -80,7 +80,7 @@ steps:
     echo "Renaming the package to ${branchName}_${packageVersion}.nupkg"
     mv $(Build.ArtifactStagingDirectory)/*.nupkg $(Build.ArtifactStagingDirectory)/${branchName}_${packageVersion}.nupkg
     echo "Pushing ${branchName}_${packageVersion}.nupkg to Azure Artifacts"
-    dotnet nuget push $(Build.ArtifactStagingDirectory)/${branchName}_${packageVersion}.nupkg --source "https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/shalom/nuget/v3/index.json" --api-key $(System.AccessToken) --skip-duplicate
+    dotnet nuget push $(Build.ArtifactStagingDirectory)/${branchName}_${packageVersion}.nupkg --source "https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json" --api-key $(System.AccessToken) --skip-duplicate
   displayName: 'Push NuGet Package with Branch and Version to Azure Artifacts'
   env:
-    VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/shalom/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
+    VSS_NUGET_EXTERNAL_FEED_ENDPOINTS: '{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/reemnu/HelloWorldAppPipeline/_packaging/HelloWorldAppArtifacts/nuget/v3/index.json","username":"AzureDevOps","password":"$(System.AccessToken)"}]}'
